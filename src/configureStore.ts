@@ -1,15 +1,15 @@
 import { history } from './history';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { routerMiddleware } from 'connected-react-router';
+import createSagaMiddleware from 'redux-saga';
 import rootReducer from './rootReducer';
+import rootSaga from './rootSaga';
 
-function configureStore() {
-  const store = createStore(
-    rootReducer, // root reducer with router state
-    compose(applyMiddleware(routerMiddleware(history)))
-  );
+const sagaMiddleware = createSagaMiddleware();
 
-  return store;
-}
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: [routerMiddleware(history), sagaMiddleware],
+});
 
-export const store = configureStore();
+sagaMiddleware.run(rootSaga);

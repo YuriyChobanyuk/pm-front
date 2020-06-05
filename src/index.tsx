@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'uikit/dist/css/uikit.min.css';
+import 'uikit/dist/js/uikit';
 
 ReactDOM.render(
   <React.StrictMode>
