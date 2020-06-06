@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { userDataSelector } from '../auth/ducks/selectors';
+import TopNavigation from './components/top-nav/TopNavigation';
 
 interface Props {
   children: ReactNode;
@@ -15,5 +16,10 @@ export const Shell: FC<Props> = ({ children }) => {
   const user = useSelector(userDataSelector);
   const dispatch = useDispatch();
 
-  return <div>{children}</div>;
+  return (
+    <div>
+      <TopNavigation />
+      {children}
+    </div>
+  );
 };
