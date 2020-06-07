@@ -1,0 +1,31 @@
+.navigationLink {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 0%;
+    background-color: blue;
+    left: 0;
+    bottom: 3px;
+  }
+
+  &:hover:before {
+    animation: underline 0.3s linear forwards;
+  }
+
+  &_active:before {
+    width: 100%;
+  }
+}
+
+@keyframes underline {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}

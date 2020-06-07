@@ -6,6 +6,7 @@ import { history } from './history';
 import { Shell } from './shell/Shell';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Auth from './auth/Auth';
+import NoteManager from './NoteManager/ducks/NoteManager';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Shell>
             <Switch>
               <Route path="/auth" component={Auth} />
+              <Route path="/notes" component={NoteManager} />
               <Redirect to="/home" />
             </Switch>
           </Shell>

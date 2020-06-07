@@ -1,20 +1,15 @@
-@tailwind base;
-
-@tailwind components;
-
-@tailwind utilities;
-
 html {
   height: 100%;
+  font-size: 16px;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100%;
+  height: 100%;
 }
 
 code {
@@ -31,3 +26,11 @@ code {
 img {
   max-width: 100%;
 }
+
+li {
+  list-style: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
+@import '~bootstrap/scss/bootstrap';
+@import 'vars';
