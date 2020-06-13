@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Badge, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Note = () => {
   return (
@@ -11,24 +11,29 @@ const Note = () => {
           <h4>Card Title</h4>
         </Card.Title>
         <Card.Subtitle className="mb-2 text-muted d-flex">
-          <Badge variant="secondary" className="mr-2">
+          <Badge variant="secondary" className="mr-2 badge-pill">
             Secondary
           </Badge>
-          <Badge variant="info">Info</Badge>
+          <Badge variant="info" className="badge-pill">
+            Info
+          </Badge>
         </Card.Subtitle>
         <Card.Text>
           Some quick example text to build on the card title and make up the
           bulk of the card's content.
         </Card.Text>
-        <Button variant="outline-secondary" size="sm" className="mr-2">
-          <FontAwesomeIcon icon={faEdit} className="mr-2" />
-          Edit
-        </Button>
-        <Button variant="success" size="sm">
-          Complete
-        </Button>
       </Card.Body>
-      <Card.Footer className="text-muted">2 days ago</Card.Footer>
+      <Card.Footer className="text-muted d-flex justify-content-between align-items-center">
+        <span>2 days ago</span>
+        <div>
+          <Button variant="primary" size="sm" className="mr-2">
+            <FontAwesomeIcon icon={faEdit} />
+          </Button>
+          <Button variant="success" size="sm">
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>
+        </div>
+      </Card.Footer>
     </Card>
   );
 };

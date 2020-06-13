@@ -4,21 +4,18 @@ import { ConnectedRouter } from 'connected-react-router';
 import { store } from './configureStore';
 import { history } from './history';
 import { Shell } from './shell/Shell';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import Auth from './auth/Auth';
-import NoteManager from './NoteManager/ducks/NoteManager';
+import { Route } from 'react-router-dom';
+import Auth from './shell/auth/Auth';
+import NoteManager from './note-manager/NoteManager';
 
 function App() {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <div className="App">
+        <div className="App h-100">
           <Shell>
-            <Switch>
-              <Route path="/auth" component={Auth} />
-              <Route path="/notes" component={NoteManager} />
-              <Redirect to="/home" />
-            </Switch>
+            <Route path="/auth" component={Auth} />
+            <Route path="/notes" component={NoteManager} />
           </Shell>
         </div>
       </ConnectedRouter>

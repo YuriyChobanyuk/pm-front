@@ -1,3 +1,5 @@
+@import 'variables';
+
 .navigationLink {
   position: relative;
 
@@ -6,7 +8,7 @@
     position: absolute;
     height: 3px;
     width: 0%;
-    background-color: blue;
+    background-color: $green;
     left: 0;
     bottom: 3px;
   }

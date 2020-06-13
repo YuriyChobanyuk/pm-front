@@ -3,7 +3,7 @@ import { createAction } from '@reduxjs/toolkit';
 import {
   LoginCredentials,
   SignUpCredentials,
-} from '../../interfaces/auth.interface';
+} from '../../../interfaces/auth.interface';
 
 export const loginUserAction = createAction(
   LOGIN_USER,

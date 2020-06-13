@@ -1,0 +1,16 @@
+@import 'variables';
+
+.formContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(99vh - 4.5rem);
+  min-height: 40rem;
+}
+
+.form {
+  width: 30rem;
+  min-width: 22.5rem;
+  padding: 2rem;
+  background-color: $gray-100;
+}

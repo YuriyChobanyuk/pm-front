@@ -1,6 +1,6 @@
 import React from 'react';
-import Note from '../components/note/Note';
-import NotesToolbar from '../components/notes-toolbar/NotesToolbar';
+import Note from './components/note/Note';
+import NotesToolbar from './components/notes-toolbar/NotesToolbar';
 
 const NoteManager: React.FC = () => {
   const arr = [1, 2, 4, 5, 1, 1, 1, 1, 1, 1, 1];

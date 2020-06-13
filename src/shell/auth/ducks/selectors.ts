@@ -1,4 +1,4 @@
-import { RootState } from '../../rootReducer';
+import { RootState } from '../../../rootReducer';
 import { createSelector } from '@reduxjs/toolkit';
 
 export const authSelector = (state: RootState) => state.auth;

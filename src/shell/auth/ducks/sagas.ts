@@ -2,8 +2,8 @@ import { loginUserAction, logoutUserAction } from './actions';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { getUserAction, setUserAction, setUserErrorAction } from './authSlice';
 import { replace } from 'connected-react-router';
-import AuthService from '../../services/authService';
-import { AuthResponse } from '../../interfaces/auth.interface';
+import AuthService from '../../../services/authService';
+import { AuthResponse } from '../../../interfaces/auth.interface';
 
 function* loginUserSaga(action: ReturnType<typeof loginUserAction>) {
   try {
