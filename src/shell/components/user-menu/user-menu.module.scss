@@ -1,0 +1,25 @@
+@import 'variables';
+
+.userFigure {
+  margin-bottom: 0;
+}
+
+.userFigureImg {
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: border 0.2s ease;
+}
+
+.userButton {
+  &::after {
+    content: none !important;
+  }
+}
+
+.userMenu {
+  z-index: 2000;
+}
+
+.userMenuItem {
+  transition: background-color 0.2s;
+}

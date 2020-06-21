@@ -3,9 +3,8 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { store } from './configureStore';
 import { history } from './history';
-import { Shell } from './shell/Shell';
-import { Route } from 'react-router-dom';
-import Auth from './shell/auth/Auth';
+import Shell from './shell/Shell';
+import { Route, Redirect } from 'react-router-dom';
 import NoteManager from './note-manager/NoteManager';
 
 function App() {
@@ -14,8 +13,8 @@ function App() {
       <ConnectedRouter history={history}>
         <div className="App h-100">
           <Shell>
-            <Route path="/auth" component={Auth} />
             <Route path="/notes" component={NoteManager} />
+            <Redirect to="/home" />
           </Shell>
         </div>
       </ConnectedRouter>

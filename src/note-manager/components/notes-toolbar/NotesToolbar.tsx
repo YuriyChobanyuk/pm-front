@@ -1,12 +1,41 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
+import AnimateHeight from 'react-animate-height';
+import AddNoteForm from '../add-note-form/AddNoteForm';
 
-const NotesToolbar = () => {
+import classes from './notes-toolbar.module.scss';
+import { INote } from '../../../interfaces/note.interface';
+
+interface Props {
+  addOneNoteAction: (note: INote) => void;
+}
+
+const NotesToolbar: React.FC<Props> = ({ addOneNoteAction }) => {
+  const [height, setHeight] = useState<string | number>(0);
+  const openAddNoteForm = useCallback(() => setHeight('auto'), [setHeight]);
+  const closeAddNoteForm = useCallback(() => setHeight(0), [setHeight]);
+  const handleToggleForm = useCallback(() => {
+    if (height === 0) {
+      openAddNoteForm();
+    } else {
+      closeAddNoteForm();
+    }
+  }, [height, openAddNoteForm, closeAddNoteForm]);
+
   return (
-    <div className="p-4 mb-4 sticky-top bg-light d-flex justify-content-between">
+    <div
+      className={`p-4 mb-4 sticky-top bg-light 
+      ${classes.notesToolbar}`}
+    >
       <div className="container">
-        <Button variant="primary">Add note</Button>
+        <Button variant="primary" onClick={handleToggleForm}>
+          Add note
+        </Button>
       </div>
+
+      <AnimateHeight duration={500} height={height}>
+        <AddNoteForm addOneNoteAction={addOneNoteAction} />
+      </AnimateHeight>
     </div>
   );
 };

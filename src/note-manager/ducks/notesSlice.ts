@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface NotesInitialState {
   data: {
-    notes: INote[] | null;
+    notes: INote[];
   };
   loading: boolean;
   error: Error | null;
@@ -11,7 +11,7 @@ interface NotesInitialState {
 
 const initialState: NotesInitialState = {
   data: {
-    notes: null,
+    notes: [],
   },
   loading: false,
   error: null,
@@ -24,13 +24,13 @@ const authSlice = createSlice({
     getNotesAction(state) {
       return {
         data: {
-          notes: null,
+          notes: [],
         },
         loading: true,
         error: null,
       };
     },
-    setNotesAction(state, action: PayloadAction<INote[] | null>) {
+    setNotesAction(state, action: PayloadAction<INote[]>) {
       return {
         data: {
           notes: action.payload,
@@ -41,11 +41,26 @@ const authSlice = createSlice({
     },
     setNotesErrorAction(state, action: PayloadAction<Error>) {
       return {
-        data: {
-          notes: null,
-        },
+        ...state,
         loading: false,
         error: action.payload,
+      };
+    },
+    setOneNoteAction(state, action: PayloadAction<INote>) {
+      return {
+        ...state,
+        data: {
+          notes: [action.payload, ...state.data.notes],
+        },
+        loading: false,
+        error: null,
+      };
+    },
+    getOneNoteAction(state, action: PayloadAction<INote>) {
+      return {
+        ...state,
+        loading: true,
+        error: null,
       };
     },
   },
@@ -56,4 +71,6 @@ export const {
   getNotesAction,
   setNotesAction,
   setNotesErrorAction,
+  getOneNoteAction,
+  setOneNoteAction,
 } = authSlice.actions;

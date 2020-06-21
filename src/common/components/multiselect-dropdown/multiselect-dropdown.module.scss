@@ -1,0 +1,10 @@
+.selectedIcon {
+  position: absolute;
+  top: 50%;
+  transform: translate(-120%, -50%);
+}
+
+.toggleButton {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}

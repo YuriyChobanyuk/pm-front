@@ -7,6 +7,6 @@ export enum NoteTag {
 export interface INote {
   title: string;
   text: string;
-  tags: NoteTag[];
-  creationDate: Date;
+  tags: string[];
+  creationDate?: Date;
 }

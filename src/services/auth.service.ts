@@ -2,14 +2,18 @@ import appClient from '../appClient';
 import { AxiosError, AxiosResponse } from 'axios';
 import { decode } from 'jsonwebtoken';
 
-import { IUser } from './../interfaces/user.interface';
+import { IUser } from '../interfaces/user.interface';
 import { LoginCredentials, AuthResponse } from '../interfaces/auth.interface';
 
 class AuthService {
   private _refreshCalled = false;
 
-  get refreshCalled() {
+  get refreshCalled(): boolean {
     return this._refreshCalled;
+  }
+
+  set refreshCalled(refreshCalled: boolean) {
+    this._refreshCalled = refreshCalled;
   }
 
   async loginRequest(
@@ -24,23 +28,25 @@ class AuthService {
       });
   }
 
-  async refreshRequest(): Promise<AuthResponse | undefined> {
+  refreshRequest: () => Promise<AuthResponse | undefined> = async () => {
     // to prevent multiple refresh requests
-    if (this._refreshCalled) return;
-    this._refreshCalled = true;
+    if (this.refreshCalled) return;
+    this.refreshCalled = true;
 
-    return appClient
+    const response = await appClient
       .get('/auth/refresh')
       .then((response: AxiosResponse<AuthResponse>) => {
-        this._refreshCalled = false;
         return response.data;
       })
       .catch((error: AxiosError) => {
         console.error(error.message);
-        this._refreshCalled = false;
         throw error;
       });
-  }
+
+    this.refreshCalled = false;
+
+    return response;
+  };
 
   getUserFromStorage(): IUser | null {
     const accessToken = localStorage.getItem('accessToken');

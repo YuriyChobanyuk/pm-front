@@ -1,10 +1,12 @@
 import { history } from './history';
 import { API_ENDPOINT, API_TIMEOUT } from './utils/constants';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import LocalStorageService from './services/localStorage.service';
 
 const appClient = axios.create({
   baseURL: API_ENDPOINT,
   timeout: API_TIMEOUT,
+  withCredentials: true,
 });
 
 interface ExtendedAxiosConfig extends AxiosRequestConfig {
@@ -17,7 +19,7 @@ interface ExtendedAxiosError extends AxiosError {
 
 appClient.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = LocalStorageService.getAccessToken();
     if (accessToken) {
       config.headers['Authorization'] = 'Bearer ' + accessToken;
     }
@@ -41,21 +43,28 @@ appClient.interceptors.response.use(
       error?.response?.status === 401 &&
       originalRequest.url === `${API_ENDPOINT}/auth/refresh`
     ) {
-      history.replace('/auth/login');
+      history.replace('/login');
       return Promise.reject(error);
     }
 
+    const currentAccessToken = LocalStorageService.getAccessToken();
+
     // In case auth error try to refresh access token and repeat original request
-    if (error?.response?.status === 401 && !originalRequest?._retry) {
+    if (
+      error?.response?.status === 401 &&
+      !originalRequest?._retry &&
+      !!currentAccessToken
+    ) {
       // mark original request to prevent cycling requests
       originalRequest._retry = true;
 
       return appClient.get(`${API_ENDPOINT}/auth/refresh`).then((res) => {
         if (res.status === 200) {
-          localStorage.setItem('accessToken', res.data.token);
+          LocalStorageService.setAccessToken(res.data.token);
+
           appClient.defaults.headers.common[
             'Authorization'
-          ] = `Bearer ${localStorage.getItem('accessToken')}`;
+          ] = `Bearer ${res.data.token}`;
           return appClient(originalRequest);
         }
       });
