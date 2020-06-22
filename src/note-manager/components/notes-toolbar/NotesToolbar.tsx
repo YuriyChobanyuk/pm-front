@@ -4,10 +4,10 @@ import AnimateHeight from 'react-animate-height';
 import AddNoteForm from '../add-note-form/AddNoteForm';
 
 import classes from './notes-toolbar.module.scss';
-import { INote } from '../../../interfaces/note.interface';
+import { INoteContent } from '../../../interfaces/note.interface';
 
 interface Props {
-  addOneNoteAction: (note: INote) => void;
+  addOneNoteAction: (note: INoteContent) => void;
 }
 
 const NotesToolbar: React.FC<Props> = ({ addOneNoteAction }) => {

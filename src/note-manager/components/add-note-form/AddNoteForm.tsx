@@ -3,11 +3,11 @@ import { Form, Row, Button } from 'react-bootstrap';
 import { Formik, Field } from 'formik';
 import * as yup from 'yup';
 
-import { NoteTag, INote } from '../../../interfaces/note.interface';
+import { NoteTag, INoteContent } from '../../../interfaces/note.interface';
 import MultiselectDropdown from '../../../common/components/multiselect-dropdown/MultiselectDropdown';
 
 interface Props {
-  addOneNoteAction: (note: INote) => void;
+  addOneNoteAction: (note: INoteContent) => void;
 }
 
 const AddNoteForm: React.FC<Props> = ({ addOneNoteAction }) => {
@@ -16,8 +16,7 @@ const AddNoteForm: React.FC<Props> = ({ addOneNoteAction }) => {
     text: yup.string().max(2000).required(),
     tags: yup.array().of(yup.string()),
   });
-
-  const initialState = {
+  const initialState: INoteContent = {
     title: '',
     text: '',
     tags: [],
@@ -32,7 +31,7 @@ const AddNoteForm: React.FC<Props> = ({ addOneNoteAction }) => {
         }}
         validationSchema={validationSchema}
       >
-        {({ values, handleSubmit, errors }) => (
+        {({ values, handleSubmit, errors, touched, isValid }) => (
           <Form onSubmit={handleSubmit}>
             <Row>
               <div className="col-4">
@@ -42,7 +41,12 @@ const AddNoteForm: React.FC<Props> = ({ addOneNoteAction }) => {
                     name="title"
                     type="text"
                     placeholder="Note title"
+                    isValid={touched.title && !errors.title}
+                    isInvalid={!!(touched.title && errors.title)}
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.title}
+                  </Form.Control.Feedback>
                 </Form.Group>
                 <MultiselectDropdown
                   options={[NoteTag.INFO, NoteTag.URGENT, NoteTag.WORK]}
@@ -61,17 +65,16 @@ const AddNoteForm: React.FC<Props> = ({ addOneNoteAction }) => {
                     rows={3}
                     placeholder="Note text"
                     style={{ resize: 'none' }}
+                    isValid={touched.text && !errors.text}
+                    isInvalid={!!(touched.text && errors.text)}
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.text}
+                  </Form.Control.Feedback>
                 </Form.Group>
               </div>
             </Row>
-            <Button
-              variant="primary"
-              type="submit"
-              onClick={() => {
-                console.log({ errors });
-              }}
-            >
+            <Button variant="primary" type="submit" disabled={!isValid}>
               submit
             </Button>
           </Form>

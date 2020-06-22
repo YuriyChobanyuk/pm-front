@@ -23,6 +23,7 @@ const authSlice = createSlice({
   reducers: {
     getNotesAction(state) {
       return {
+        ...state,
         data: {
           notes: [],
         },
@@ -32,6 +33,7 @@ const authSlice = createSlice({
     },
     setNotesAction(state, action: PayloadAction<INote[]>) {
       return {
+        ...state,
         data: {
           notes: action.payload,
         },
@@ -56,11 +58,23 @@ const authSlice = createSlice({
         error: null,
       };
     },
-    getOneNoteAction(state, action: PayloadAction<INote>) {
+    getOneNoteAction(state, action: PayloadAction<void>) {
       return {
         ...state,
         loading: true,
         error: null,
+      };
+    },
+    removeNoteAction(state, action: PayloadAction<INote>) {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: {
+          notes: state.data.notes.filter(
+            (note) => note.id !== action.payload.id
+          ),
+        },
       };
     },
   },
@@ -73,4 +87,5 @@ export const {
   setNotesErrorAction,
   getOneNoteAction,
   setOneNoteAction,
+  removeNoteAction,
 } = authSlice.actions;

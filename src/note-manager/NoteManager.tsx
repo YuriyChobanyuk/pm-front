@@ -7,12 +7,14 @@ import { RootState } from '../rootReducer';
 import { getAllNotesSelector } from './ducks/selector';
 import { getNotesAction } from './ducks/notesSlice';
 import { addOneNoteAction } from './ducks/actions';
-import { INote } from '../interfaces/note.interface';
+import { INote, INoteContent } from '../interfaces/note.interface';
+import { completeNoteAction } from './ducks/actions';
 
 interface Props {
   notes: INote[];
   getNotesAction: () => void;
-  addOneNoteAction: (note: INote) => void;
+  addOneNoteAction: (note: INoteContent) => void;
+  completeNoteAction: (note: INote) => void;
 }
 
 const NoteManager: React.FC<Props> = ({
@@ -31,8 +33,8 @@ const NoteManager: React.FC<Props> = ({
         <div className="row">
           {!notes.length && <div>no notes</div>}
           {notes.map((note) => (
-            <div className="col-md-4">
-              <Note {...note} />
+            <div className="col-md-4" key={note.id}>
+              <Note note={note} />
             </div>
           ))}
         </div>
@@ -48,6 +50,7 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = {
   getNotesAction,
   addOneNoteAction,
+  completeNoteAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteManager);

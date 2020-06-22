@@ -4,9 +4,17 @@ export enum NoteTag {
   INFO = 'information',
 }
 
-export interface INote {
+export interface INoteContent {
   title: string;
   text: string;
   tags: string[];
-  creationDate?: Date;
+}
+
+export interface INote {
+  id: string;
+  title: string;
+  text: string;
+  tags: string[];
+  creationDate: Date;
+  active: boolean;
 }

@@ -1,4 +1,4 @@
-import { INote } from './../interfaces/note.interface';
+import { INote, INoteContent } from './../interfaces/note.interface';
 import appClient from '../appClient';
 
 class NoteService {
@@ -6,8 +6,12 @@ class NoteService {
     return appClient.get('/notes').then((res) => res.data);
   }
 
-  async addNote(note: INote): Promise<INote> {
+  async addNote(note: INoteContent): Promise<INote> {
     return appClient.post('/notes', note).then((res) => res.data);
+  }
+
+  async updateNote(note: INote): Promise<void> {
+    return appClient.patch('/notes', note).then((res) => res.data);
   }
 }
 
