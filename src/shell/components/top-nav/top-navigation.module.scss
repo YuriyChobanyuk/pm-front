@@ -3,6 +3,10 @@
 .navigationLink {
   position: relative;
 
+  a {
+    transition: color 0.2s ease;
+  }
+
   &:before {
     content: '';
     position: absolute;
@@ -41,4 +45,11 @@
 
 .brandFigureImg {
   margin-bottom: 0;
+}
+
+.navigationBar_home {
+  background-color: rgba($color: #000000, $alpha: 0);
+  position: absolute;
+  width: 100%;
+  z-index: 100;
 }

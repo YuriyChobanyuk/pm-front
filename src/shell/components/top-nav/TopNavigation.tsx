@@ -16,10 +16,24 @@ interface Props {
 const TopNavigation: React.FC<Props> = ({ user, logoutUser }) => {
   const { pathname } = useLocation();
 
+  const isHomePage = pathname.includes('home');
+
   const routes = ['notes', 'upcoming'];
 
+  const navbarClasses = cx(
+    {
+      [classes.navigationBar_home]: isHomePage,
+    },
+    'px-xl-4'
+  );
+
   return (
-    <Navbar bg="primary" variant="dark" expand="lg" className="px-xl-4">
+    <Navbar
+      bg={!isHomePage ? 'primary' : undefined}
+      variant="dark"
+      expand="lg"
+      className={navbarClasses}
+    >
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse
         id="basic-navbar-nav"
@@ -58,6 +72,7 @@ const TopNavigation: React.FC<Props> = ({ user, logoutUser }) => {
           user={user}
           className="order-md-2 order-sm-1"
           logoutUser={logoutUser}
+          isHomePage={isHomePage}
         />
       ) : (
         <AuthControl className="order-md-2 order-sm-1" />

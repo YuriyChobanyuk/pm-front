@@ -8,14 +8,20 @@ interface Props {
   user: IUser;
   className?: string;
   logoutUser: () => void;
+  isHomePage: boolean;
 }
 
-const UserMenu: FC<Props> = ({ user, className, logoutUser }) => {
+const UserMenu: FC<Props> = ({ user, className, logoutUser, isHomePage }) => {
   const userAvatar = user.img_path || 'Portrait_Placeholder.png';
   return (
     <div className={`d-flex ${className}`}>
       <Dropdown drop="down" alignRight>
-        <Dropdown.Toggle id="dropdown-custom-1" className={classes.userButton}>
+        <Dropdown.Toggle
+          id="dropdown-custom-1"
+          className={`${classes.userButton} ${
+            isHomePage ? classes.userButtonTransparent : ''
+          }`}
+        >
           <span className="text-light mr-3">{user.name}</span>
           <Figure className={classes.userFigure}>
             <Figure.Image

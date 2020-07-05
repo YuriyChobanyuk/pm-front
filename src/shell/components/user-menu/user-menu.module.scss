@@ -16,6 +16,11 @@
   }
 }
 
+.userButtonTransparent {
+  background-color: rgba($gray-200, 0);
+  border-color: rgba($gray-200, 0);
+}
+
 .userMenu {
   z-index: 2000;
 }
