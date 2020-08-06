@@ -34,6 +34,7 @@ const MultiselectDropdown: React.FC<Props> = ({
       setMenuOpen(val);
     }
   };
+
   const menuItemClickedThatShouldntCloseDropdown = () => {
     setForceOpen(true);
   };
