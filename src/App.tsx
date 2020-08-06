@@ -5,7 +5,6 @@ import { store } from './configureStore';
 import { history } from './history';
 import Shell from './shell/Shell';
 import { Route, Redirect } from 'react-router-dom';
-import NoteManager from './note-manager/NoteManager';
 import Landing from './landing/Landing';
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
       <ConnectedRouter history={history}>
         <div className="App h-100">
           <Shell>
-            <Route path="/notes" component={NoteManager} />
             <Route path="/home" component={Landing} />
             <Redirect to="/home" />
           </Shell>

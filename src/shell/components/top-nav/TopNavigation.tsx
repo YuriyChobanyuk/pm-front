@@ -18,7 +18,7 @@ const TopNavigation: React.FC<Props> = ({ user, logoutUser }) => {
 
   const isHomePage = pathname.includes('home');
 
-  const routes = ['notes', 'upcoming'];
+  const routes = ['upcoming'];
 
   const navbarClasses = cx(
     {
