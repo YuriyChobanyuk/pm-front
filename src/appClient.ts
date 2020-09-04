@@ -37,11 +37,12 @@ appClient.interceptors.response.use(
   },
   (error: ExtendedAxiosError) => {
     const originalRequest = error.config;
+    console.log(originalRequest);
 
     // In case refresh try failed throw an error
     if (
       error?.response?.status === 401 &&
-      originalRequest.url === `${API_ENDPOINT}/auth/refresh`
+      originalRequest.url?.endsWith('/Auth/refresh')
     ) {
       history.replace('/login');
       return Promise.reject(error);
@@ -49,7 +50,7 @@ appClient.interceptors.response.use(
 
     const currentAccessToken = LocalStorageService.getAccessToken();
 
-    // In case auth error try to refresh access token and repeat original request
+    // In case Auth error try to refresh access token and repeat original request
     if (
       error?.response?.status === 401 &&
       !originalRequest?._retry &&

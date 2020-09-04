@@ -15,16 +15,14 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "axios": "^0.19.2",
-    "bootstrap": "^4.5.0",
-    "classnames": "^2.2.6",
+    "color": "^3.1.2",
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.14.0",
-    "formik": "^2.1.4",
+    "formik": "^2.1.5",
     "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-animate-height": "^2.0.21",
-    "react-bootstrap": "^1.0.1",
     "react-contenteditable": "^3.3.4",
     "react-dom": "^16.13.1",
     "react-multi-select-component": "^2.0.10",
@@ -33,14 +31,18 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
-    "typescript": "~3.7.2",
-    "yup": "^0.29.0"
+    "styled-components": "^5.1.1",
+    "typescript": "^3.9.7",
+    "yup": "^0.29.3"
   },
   "prettier": {
     "trailingComma": "es5",
     "tabWidth": 2,
     "semi": true,
     "singleQuote": true
+  },
+  "resolutions": {
+    "styled-components": "^5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -65,12 +67,14 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
+    "@types/color": "^3.0.1",
     "@types/history": "^4.7.5",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/lodash": "^4.14.155",
     "@types/react-redux": "^7.1.8",
     "@types/react-router": "^5.1.7",
     "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.2",
     "@types/yup": "^0.29.0"
   }
 }

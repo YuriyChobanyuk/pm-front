@@ -3,20 +3,31 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { store } from './configureStore';
 import { history } from './history';
-import Shell from './shell/Shell';
+import Shell from './Shell';
 import { Route, Redirect } from 'react-router-dom';
-import Landing from './landing/Landing';
+import Landing from './Landing';
+import AdminPanel from './AdminPanel';
+import ShowsContainer from './Shows';
+import {
+  ADMIN_PATH,
+  HOME_PATH,
+  SHOWS_PATH,
+} from './common/constants';
+import { ThemeProvider } from 'styled-components';
+import defaultTheme from './styles/themes/default/default-theme';
 
 function App() {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <div className="App h-100">
+        <ThemeProvider theme={defaultTheme}>
           <Shell>
-            <Route path="/home" component={Landing} />
+            <Route path={`/${HOME_PATH}`} component={Landing} />
+            <Route path={`/${ADMIN_PATH}`} component={AdminPanel} />
+            <Route path={`/${SHOWS_PATH}`} component={ShowsContainer} />
             <Redirect to="/home" />
           </Shell>
-        </div>
+        </ThemeProvider>
       </ConnectedRouter>
     </Provider>
   );

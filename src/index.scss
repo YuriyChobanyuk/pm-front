@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI', 'Oxygen',
+  font-family:'Lato', 'Roboto', 'Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -30,9 +30,13 @@ img {
 li {
   list-style: none;
 }
+ #root {
+   height: 100%;
+ }
 
-@import 'variables';
-@import 'my-utils';
-@import '~bootstrap/scss/bootstrap';
-
-@import 'bootswatch';
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+ background-color: white !important;
+}
