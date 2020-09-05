@@ -16,7 +16,6 @@ const Landing: React.FC = () => {
           <LandingTitle animationDelay="0.4s">destiny</LandingTitle>
         </LandingTitleContainer>
       </LandingPageTop>
-      <div>cards here</div>
     </LandingPageContainer>
   );
 };

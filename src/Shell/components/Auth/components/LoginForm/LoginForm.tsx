@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 import { LoginCredentials } from '../../../../../interfaces';
-import Input from '../../../../../common/components/Input';
+import FormInput from '../../../../../common/components/Input';
 import {
   AuthFormContainer,
   AuthForm,
@@ -37,8 +37,6 @@ const LoginForm: React.FC<Props> = ({ handleLogin }) => {
         validateOnChange
         validateOnBlur
         onSubmit={(values: LoginCredentials, actions) => {
-          console.log(typeof handleLogin);
-
           handleLogin(values);
         }}
       >
@@ -51,11 +49,10 @@ const LoginForm: React.FC<Props> = ({ handleLogin }) => {
           handleChange,
           handleBlur,
         }) => {
-          console.log({ touched, isValid });
           return (
             <AuthForm onSubmit={handleSubmit}>
               <h3>Login</h3>
-              <Input
+              <FormInput
                 type="email"
                 name="email"
                 placeholder="Enter email"
@@ -69,7 +66,7 @@ const LoginForm: React.FC<Props> = ({ handleLogin }) => {
                 margin="2.5rem auto"
               />
 
-              <Input
+              <FormInput
                 type="password"
                 placeholder="Enter password"
                 name="password"
@@ -110,4 +107,4 @@ const LoginForm: React.FC<Props> = ({ handleLogin }) => {
   );
 };
 
-export default LoginForm;
+export default memo(LoginForm);

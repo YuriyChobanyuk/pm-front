@@ -1,5 +1,6 @@
 import { RootState } from '../../../../rootReducer';
 import { createSelector } from '@reduxjs/toolkit';
+import { UserRole } from '../../../../interfaces';
 
 export const authSelector = (state: RootState) => state.auth;
 export const routerSelector = (state: RootState) => state.router;
@@ -22,4 +23,9 @@ export const userLoadingSelector = createSelector(
 export const isAuthSelector = createSelector(
   [authSelector],
   (auth) => !!auth.data.user
+);
+
+export const isAdminSelector = createSelector(
+  [authSelector],
+  (auth) => auth.data.user?.role === UserRole.ADMIN
 );

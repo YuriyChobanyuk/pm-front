@@ -5,42 +5,15 @@ import {
   InputValidationFeedbackProps,
   CustomInputContainerProps,
 } from './types';
-import { ValidationStatus } from '../ValidationTag';
-import { ColorVariants } from '../../../styles/themes/types/theme-types';
+import { getValidationColor } from '../../../utils';
+import { InputDefault } from '../../../styles/templates/inputs';
 
-function getValidationColor(
-  status: ValidationStatus,
-  defaultColor: ColorVariants = 'info'
-): ColorVariants {
-  switch (status) {
-    case 'valid':
-      return 'success';
-    case 'invalid':
-      return 'danger';
-    default:
-      return defaultColor;
-  }
-}
-
-export const InputField = styled.input<InputFieldProps>`
-  padding: 0.5rem 1rem;
-  font-size: 1.1rem;
-  border: 2px solid
-    ${({ status, theme }) => theme.colors[getValidationColor(status)]};
-
-  border-radius: 100rem;
-  width: 100%;
-  outline: none;
+export const InputField = styled('input')<InputFieldProps>`
+  ${InputDefault};
   margin: ${(props) => props.margin || '0'};
-  transition: transform 0.3s, box-shadow 0.3s;
-
-  &:focus {
-    box-shadow: 0 0 5px 2px
-      ${({ status, theme }) => theme.colors[getValidationColor(status)]}80;
-  }
 `;
 
-export const InputLabel = styled.label<InputLabelProps>`
+export const FormInputLabel = styled.label<InputLabelProps>`
     left: 50%;
     transform: translate(-50%, -30%);
     position: absolute;
@@ -78,10 +51,10 @@ export const InputValidationFeedback = styled.div<InputValidationFeedbackProps>`
   transform: translateY(120%);
 `;
 
-export const CustomInputContainer = styled.div<CustomInputContainerProps>`
-  margin: ${({margin}) => margin || '1rem 1.5rem'};
+export const FormInputContainer = styled.div<CustomInputContainerProps>`
+  margin: ${({ margin }) => margin || '1rem 1.5rem'};
   position: relative;
-  max-width: ${({maxWidth}) => maxWidth || '34rem'};
+  max-width: ${({ maxWidth }) => maxWidth || '34rem'};
     min-width: 26rem;
   }
 
@@ -89,4 +62,13 @@ export const CustomInputContainer = styled.div<CustomInputContainerProps>`
     &::before {
       width: 100%;
     }
+`;
+
+export const DefaultInputLabel = styled.label`
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  transform: translateY(-135%);
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.colors.darken};
 `;

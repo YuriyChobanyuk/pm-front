@@ -32,7 +32,7 @@ export const TopNav = styled.nav`
 `;
 
 interface TopNavLinkProps {
-  isHomePath: boolean;
+  transparent: boolean;
 }
 
 export const TopNavLink = styled(NavLink)<TopNavLinkProps>`
@@ -45,8 +45,8 @@ export const TopNavLink = styled(NavLink)<TopNavLinkProps>`
   transition: 0.25s;
   border-radius: 0.25rem;
   white-space: nowrap;
-  background-color: ${({ isHomePath, theme }) => {
-    return isHomePath ? theme.colors.transparent : theme.colors.primary;
+  background-color: ${({ transparent, theme }) => {
+    return transparent ? theme.colors.transparent : theme.colors.primary;
   }};
 
   &.top-nav-link-active {

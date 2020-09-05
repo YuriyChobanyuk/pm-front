@@ -2,8 +2,8 @@ import appClient from '../appClient';
 import { AxiosError, AxiosResponse } from 'axios';
 import { decode } from 'jsonwebtoken';
 
-import { IUser } from '../interfaces/user.interface';
-import { LoginCredentials, AuthResponse } from '../interfaces/auth.interface';
+import { IUser } from '../interfaces';
+import { LoginCredentials, AuthResponse } from '../interfaces';
 
 class AuthService {
   private _refreshCalled = false;

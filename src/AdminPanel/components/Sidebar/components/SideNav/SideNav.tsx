@@ -19,8 +19,9 @@ const SidebarListItem = styled.li<SidebarListItemProps>`
   background-color: ${({ active, theme }) =>
     active ? theme.colors.primaryLighten : theme.colors.grey};
   transition: 0.2s background-color;
+  text-transform: capitalize;
   color: ${({ active, theme }) =>
-    active ? theme.colors.secondary : theme.colors.primary};
+    active ? theme.colors.light : theme.colors.primary};
   &:not(:last-child) {
     margin-bottom: 0.5rem;
   }
@@ -42,17 +43,16 @@ function SideNav() {
   const location = useLocation();
   const { url } = useRouteMatch();
 
-  console.log({ location, url });
-
   return (
     <SidebarList>
-      {menuOptions.map(({ title, path, icon }) => (
+      {menuOptions.map(({ label, path, icon }) => (
         <SidebarListItem
           active={location.pathname.includes(`${ADMIN_PATH}/${path}`)}
+          key={path}
         >
           <SidebarLink to={`${url}/${path}`}>
             <SidebarIcon icon={icon} />
-            {title}
+            {label}
           </SidebarLink>
         </SidebarListItem>
       ))}

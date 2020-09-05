@@ -1,1 +1,2 @@
-export { default } from './Input';
+export { default } from './FormInput';
+export { default as SearchInput } from './components/SearchInput';

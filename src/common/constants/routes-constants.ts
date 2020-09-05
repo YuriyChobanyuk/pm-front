@@ -8,3 +8,8 @@ export const SIGN_UP_PATH = 'signup';
 export const ADMIN_SHOWS_PATH = 'shows-manager';
 export const ADMIN_USERS_PATH = 'users-manager';
 export const ADMIN_DASHBOARD_PATH = 'dashboard';
+
+//SHOW MANAGER ROUTES
+export const SHOWS_LIST = 'list';
+export const ADD_SHOW = 'add';
+export const SHOW_DETAILS = 'details';

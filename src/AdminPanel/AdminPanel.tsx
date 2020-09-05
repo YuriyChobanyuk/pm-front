@@ -1,12 +1,12 @@
 import React from 'react';
 import Sidebar from './components/Sidebar';
-import { useRouteMatch, Switch, Route } from 'react-router-dom';
+import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
 import {
   ADMIN_DASHBOARD_PATH,
   ADMIN_SHOWS_PATH,
   ADMIN_USERS_PATH,
 } from '../common/constants';
-import ShowsManagerContainer from './components/Show';
+import ShowsManagerContainer from './components/ShowsManager';
 import DashboardContainer from './components/Dashboard';
 import UsersManagerContainer from './components/Users';
 import styled from 'styled-components';
@@ -30,7 +30,6 @@ function AdminPanel() {
     <PageWrapper>
       <Sidebar />
       <Content>
-        admin panel
         <Switch>
           <Route
             path={`${path}/${ADMIN_SHOWS_PATH}`}
@@ -44,6 +43,7 @@ function AdminPanel() {
             path={`${path}/${ADMIN_USERS_PATH}`}
             component={UsersManagerContainer}
           />
+          <Redirect to={`${path}/${ADMIN_SHOWS_PATH}`} />
         </Switch>
       </Content>
     </PageWrapper>

@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SyntheticEvent } from 'react';
 import ValidationTag, { ValidationStatus } from '../ValidationTag';
-import { InputLabel, InputField, CustomInputContainer } from './styles';
+import {
+  InputField,
+  InputValidationFeedback,
+  FormInputLabel, FormInputContainer,
+} from './styles';
 
 interface CustomInputProps {
   onChange: (e: SyntheticEvent) => any;
-  onBlur: (e: SyntheticEvent) => any;
+  onBlur?: (e: SyntheticEvent) => any;
   error?: string;
   name: string;
   type: string;
@@ -18,7 +22,7 @@ interface CustomInputProps {
   margin?: string;
 }
 
-const Input: React.FC<CustomInputProps> = ({
+const FormInput: React.FC<CustomInputProps> = ({
   error,
   onChange,
   id,
@@ -64,8 +68,9 @@ const Input: React.FC<CustomInputProps> = ({
       left: offsetLeft + offsetWidth - ICON_RIGHT_OFFSET,
     });
   }, [inputRef]);
+
   return (
-    <CustomInputContainer margin={margin}>
+    <FormInputContainer margin={margin}>
       <InputField
         {...{
           id,
@@ -79,17 +84,17 @@ const Input: React.FC<CustomInputProps> = ({
         }}
         ref={inputRef}
       />
-      <InputLabel htmlFor={id} status={status}>
+      <FormInputLabel htmlFor={id} status={status}>
         {placeholder}
-      </InputLabel>
+      </FormInputLabel>
       {isTouched && !isValid && (
-        <ValidationTag status={status} {...validationIconPos}>
+        <InputValidationFeedback status={status} {...validationIconPos}>
           {error}
-        </ValidationTag>
+        </InputValidationFeedback>
       )}
       <ValidationTag status={status} {...validationIconPos} />
-    </CustomInputContainer>
+    </FormInputContainer>
   );
 };
 
-export default Input;
+export default FormInput;

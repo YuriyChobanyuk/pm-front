@@ -15,6 +15,8 @@ export interface ThemeColors {
   lightgrey: string;
   grey: string;
   transparent: string;
+  lightcyan: string;
+  darken: string;
 }
 
 export type ColorVariants = keyof ThemeColors;

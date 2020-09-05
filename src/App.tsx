@@ -15,15 +15,17 @@ import {
 } from './common/constants';
 import { ThemeProvider } from 'styled-components';
 import defaultTheme from './styles/themes/default/default-theme';
+import AdminRoute from "./Shell/components/Auth/components/AdminRoute";
 
 function App() {
+
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <ThemeProvider theme={defaultTheme}>
           <Shell>
             <Route path={`/${HOME_PATH}`} component={Landing} />
-            <Route path={`/${ADMIN_PATH}`} component={AdminPanel} />
+            <AdminRoute path={`/${ADMIN_PATH}`} component={AdminPanel} />
             <Route path={`/${SHOWS_PATH}`} component={ShowsContainer} />
             <Redirect to="/home" />
           </Shell>

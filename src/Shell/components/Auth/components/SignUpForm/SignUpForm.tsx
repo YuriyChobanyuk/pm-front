@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import * as Yup from 'yup';
 
 import { SignUpCredentials } from '../../../../../interfaces';
@@ -9,7 +9,7 @@ import {
   BackgroundImage,
   FormButtonSignUpContainer,
 } from '../../styles';
-import Input from '../../../../../common/components/Input';
+import FormInput from '../../../../../common/components/Input';
 import { FormLinkButton, SubmitButton } from '../../../../../common/styled/buttons';
 import { Link } from 'react-router-dom';
 import {
@@ -67,7 +67,7 @@ const SignUpForm: React.FC<Props> = ({ handleSingUp }) => {
           <AuthForm onSubmit={handleSubmit}>
             <h3>Sign Up</h3>
 
-            <Input
+            <FormInput
               type="text"
               name="name"
               placeholder="Enter name"
@@ -81,7 +81,7 @@ const SignUpForm: React.FC<Props> = ({ handleSingUp }) => {
               margin="2.5rem auto"
             />
 
-            <Input
+            <FormInput
               type="email"
               name="email"
               placeholder="Enter email"
@@ -95,7 +95,7 @@ const SignUpForm: React.FC<Props> = ({ handleSingUp }) => {
               margin="2.5rem auto"
             />
 
-            <Input
+            <FormInput
               type="password"
               placeholder="Password"
               name="password"
@@ -136,4 +136,4 @@ const SignUpForm: React.FC<Props> = ({ handleSingUp }) => {
   );
 };
 
-export default SignUpForm;
+export default memo(SignUpForm);

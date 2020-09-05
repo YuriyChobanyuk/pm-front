@@ -20,7 +20,6 @@ interface Props {
 
 const TopNavigation: React.FC<Props> = ({ user, logoutUser }) => {
   const { pathname } = useLocation();
-  console.log({ pathname });
 
   const isHomePage = pathname.startsWith(`/${HOME_PATH}`);
   const isAuthPage = useMemo(
@@ -39,16 +38,22 @@ const TopNavigation: React.FC<Props> = ({ user, logoutUser }) => {
             <LogoImage alt="logo" src={LOGO_IMAGE} />
           </Logo>
 
-          {routes.map(({ path, label }) => (
-            <TopNavLink
-              key={path}
-              to={`/${path}`}
-              isHomePath={isHomePage}
-              activeClassName="top-nav-link-active"
-            >
-              {label}
-            </TopNavLink>
-          ))}
+          {routes
+            .filter(({ restrictTo }) => {
+              if (!restrictTo || !restrictTo.length) return true;
+              if (!user?.role) return false;
+              return restrictTo.includes(user.role);
+            })
+            .map(({ path, label }) => (
+              <TopNavLink
+                key={path}
+                to={`/${path}`}
+                transparent={isHomePage}
+                activeClassName="top-nav-link-active"
+              >
+                {label}
+              </TopNavLink>
+            ))}
         </ul>
       </TopNav>
       {user && (

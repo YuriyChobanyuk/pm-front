@@ -1,7 +1,9 @@
+import { RefObject } from 'react';
 import { ValidationStatus } from '../ValidationTag';
 
 export interface InputFieldProps {
-  status: ValidationStatus;
+  ref?: RefObject<any>;
+  status?: ValidationStatus;
   margin?: string;
 }
 
@@ -16,4 +18,5 @@ export interface InputValidationFeedbackProps {
 export interface CustomInputContainerProps {
   margin?: string;
   maxWidth?: string;
+  hasValue?: boolean;
 }

@@ -9,7 +9,7 @@ import {
 } from './actions';
 import { replace } from 'connected-react-router';
 import AuthService from '../../../../services/auth.service';
-import { AuthResponse } from '../../../../interfaces/auth.interface';
+import { AuthResponse } from '../../../../interfaces';
 import localStorageService from '../../../../services/localStorage.service';
 
 function* loginUserSaga(action: ReturnType<typeof loginUserAction>) {
