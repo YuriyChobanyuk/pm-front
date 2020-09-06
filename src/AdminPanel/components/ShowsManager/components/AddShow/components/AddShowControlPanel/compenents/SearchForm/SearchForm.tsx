@@ -35,13 +35,12 @@ const years = new Array(60).fill(0).map((zero, i) => ({
 }));
 
 const ControlPanelContainer = styled.form`
-  background-color: ${({ theme }) => theme.colors.light};
-  border: 2px solid ${({ theme }) => theme.colors.dark};
-  padding: 1rem 1.5rem;
+  background-color: ${({ theme }) => theme.colors.lightcyan}80;
+  border-bottom: 2px solid ${({ theme }) => theme.colors.info};
+  padding: 0.5rem 0;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border-radius: 1.3rem;
 `;
 
 const SearchButton = styled('button')<{ status?: ValidationStatus }>`
@@ -185,9 +184,10 @@ const SearchForm: React.FC<Props> = ({ setSearchQuery, searchResults }) => {
         placeholder="Show title"
         margin="1.5rem 0"
         value={values.search}
-        id={'34'}
+        id={'omdb-search-input'}
         onBlur={handleBlur}
         isTouched={touched.search}
+        isValid={!errors.search}
         error={errors.search}
       />
 

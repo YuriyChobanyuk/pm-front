@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState, FocusEvent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { CustomInputContainerProps } from '../../types';
 import {
   InputField,
@@ -28,16 +28,15 @@ const SearchInputContainer = styled.div<CustomInputContainerProps>`
   margin: ${({ margin }) => margin || '0'};
   position: relative;
   max-width: ${({ maxWidth }) => maxWidth || '34rem'};
-    min-width: 26rem;
-  }
+  min-width: ${({ small }) => (small ? '10rem' : '26rem')};
   ${InputField}:focus + ${SearchIcon}, ${InputField}:hover + ${SearchIcon} {
-    display: ${({hasValue}) => hasValue ? 'none' : 'inline'};
+    display: ${({ hasValue }) => (hasValue ? 'none' : 'inline')};
   }
 `;
 
 interface SearchInputProps {
-  onChange: (e: ChangeEvent<HTMLInputElement>) => any;
-  onBlur?: (e: FocusEvent<HTMLInputElement>) => any;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   error?: string;
   name: string;
   value: string;
@@ -49,6 +48,7 @@ interface SearchInputProps {
   margin?: string;
   label?: string;
   maxWidth?: string;
+  small?: boolean;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
@@ -65,6 +65,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onBlur,
   label,
   maxWidth,
+  small,
 }) => {
   const [status, setStatus] = useState<ValidationStatus>();
 
@@ -77,7 +78,12 @@ const SearchInput: React.FC<SearchInputProps> = ({
   }, [isValid, isTouched]);
 
   return (
-    <SearchInputContainer margin={margin} hasValue={!!value} maxWidth={maxWidth}>
+    <SearchInputContainer
+      margin={margin}
+      hasValue={!!value}
+      maxWidth={maxWidth}
+      small={small}
+    >
       {!hideLabel && (
         <DefaultInputLabel htmlFor={id}>{label}</DefaultInputLabel>
       )}
@@ -90,6 +96,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         placeholder={placeholder}
         id={id}
         status={status}
+        small={small}
       />
       <SearchIcon icon={faSearch} />
       {isTouched && !isValid && (

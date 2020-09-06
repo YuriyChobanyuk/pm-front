@@ -65,3 +65,22 @@ export const getTextSlideAnimation = (animationDelay: string) => {
   animation: ${textSlide} 1s ease-in ${animationDelay} forwards;
 `
 }
+
+export const fadeInAnimation = keyframes`
+  0% {
+    transform: scale(0);
+  }
+  
+  100% {
+    transform: scale(1);
+  }
+`
+export const fadeOutAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  
+  100% {
+    transform: scale(0);
+  }
+`

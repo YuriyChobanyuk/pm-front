@@ -22,6 +22,8 @@ const DropdownHeader = styled.div<{ active: boolean }>`
   ${InputDefault};
   cursor: pointer;
   position: relative;
+  display: flex;
+  align-items: center;
 
   ${({ active }) =>
     active &&
@@ -165,36 +167,36 @@ const Dropdown: React.FC<Props> = ({
   const handleCloseList = useCallback(() => setActive(false), []);
   useOutsideClick(containerRef, handleCloseList);
 
-  const setDropdownItemFocus = useCallback(
-    (first: boolean) => {
-      const firstListElem = listRef.current?.firstChild as HTMLLIElement;
-      const lastListElem = listRef.current?.lastChild as HTMLLIElement;
-      if (first) {
-        firstListElem.focus();
-      } else {
-        lastListElem.focus();
-      }
-    },
-    [listRef]
-  );
-
   const handleContainerKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
-      console.log({ key: e.key });
-      if (e.key === 'Enter' || e.key === ' ') {
-        setActive((prev) => !prev);
-      }
-      if (e.key === 'Escape') {
-        setActive(false);
-      }
-      if (e.key === 'ArrowDown') {
-        setDropdownItemFocus(true);
-      }
-      if (e.key === 'ArrowUp') {
-        setDropdownItemFocus(false);
+      const firstListElem = listRef.current?.firstChild as HTMLLIElement;
+      const lastListElem = listRef.current?.lastChild as HTMLLIElement;
+      switch(e.key) {
+        case 'Enter':
+        case ' ':{
+          setActive((prev) => !prev);
+          break;
+        }
+        case 'Escape': {
+          setActive(false);
+          break;
+        }
+        case 'ArrowDown': {
+          if (firstListElem) {
+            firstListElem.focus();
+          }
+          break;
+        }
+        case 'ArrowUp': {
+          if(lastListElem) {
+            lastListElem.focus();
+          }
+          break;
+        }
+        default: return;
       }
     },
-    [setDropdownItemFocus]
+    []
   );
 
   const handleListItemKeyDown = useCallback(
@@ -202,35 +204,35 @@ const Dropdown: React.FC<Props> = ({
       e.stopPropagation();
       const nextItem = e.currentTarget?.nextSibling as HTMLLIElement;
       const prevItem = e.currentTarget?.previousSibling as HTMLLIElement;
-      if (e.key === 'ArrowDown' && nextItem) {
-        if (e.currentTarget) {
-          e.currentTarget.blur();
+      switch (e.key) {
+        case 'Enter':
+        case ' ': {
+          const itemData = items.find(({ id }) => id === e.currentTarget.id);
+          if (itemData) {
+            onChange(itemData);
+          }
+          setActive(false);
+          containerRef.current?.focus();
+          break;
         }
-        nextItem.focus();
-        return;
-      }
-      if (e.key === 'ArrowUp' && prevItem) {
-        if (e.currentTarget) {
-          e.currentTarget.blur();
+        case 'ArrowDown': {
+          if (nextItem) {
+            nextItem.focus();
+          }
+          break;
         }
-        prevItem.focus();
-        return;
-      }
-      if (e.key === 'Enter' || e.key === ' ') {
-        if (e.currentTarget) {
-          e.currentTarget.blur();
+        case 'ArrowUp': {
+          if (prevItem) {
+            prevItem.focus();
+          }
+          break;
         }
-        const itemData = items.find(({ id }) => id === e.currentTarget.id);
-        if (itemData) {
-          onChange(itemData);
+        case 'Escape': {
+          setActive(false);
+          containerRef.current?.focus();
+          break;
         }
-        setActive(false);
-      }
-      if (e.key === 'Escape') {
-        if (e.currentTarget) {
-          e.currentTarget.blur();
-        }
-        setActive(false);
+        default: return;
       }
     },
     [onChange, items]
@@ -243,6 +245,7 @@ const Dropdown: React.FC<Props> = ({
       ref={containerRef}
       id={id}
       tabIndex={0}
+      role="options"
       margin={margin}
       width={width}
       onBlur={onBlur}

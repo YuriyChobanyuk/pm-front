@@ -27,3 +27,11 @@ export const InputDefault = css<{ status?: ValidationStatus }>`
     ${InputFocusShadow};
   }
 `;
+
+export const SmallInputDefault = css<{ status?: ValidationStatus }>`
+  padding: 0.5rem .5rem .5rem 1rem;
+  font-size: .9rem;
+  border-radius: 100rem;
+  width: 100%;
+  min-height: 2rem;
+`;

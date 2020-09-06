@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SideNav from './components/SideNav';
 
 const SidebarWrapper = styled.div`
-  height: 100%;
+  min-height: calc(100vh - ${({ theme }) => theme.constants.TOP_NAV_HEIGHT});
   width: 20rem;
   background-color: ${({ theme }) => theme.colors.light};
   border-right: 2px solid ${({ theme }) => theme.colors.dark};

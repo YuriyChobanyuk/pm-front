@@ -16,6 +16,7 @@ import {
 import { RootState } from '../rootReducer';
 import localStorageService from '../services/localStorage.service';
 import { LOGIN_PATH, SIGN_UP_PATH } from '../common/constants';
+import styled from 'styled-components';
 
 interface Props {
   user: IUser | null;
@@ -53,8 +54,12 @@ const Shell: FC<Props> = ({
     return <div>loading</div>;
   }
 
+  const AppContainer = styled.div`
+    min-height: 100%;
+  `;
+
   return (
-    <div style={{ height: '100%' }}>
+    <AppContainer>
       <TopNavigation user={user} logoutUser={dispatchLogout} />
       <Switch>
         <Route path={`/${LOGIN_PATH}`}>
@@ -65,7 +70,7 @@ const Shell: FC<Props> = ({
         </Route>
         {children}
       </Switch>
-    </div>
+    </AppContainer>
   );
 };
 

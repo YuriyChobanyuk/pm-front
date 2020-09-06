@@ -6,10 +6,14 @@ import {
   CustomInputContainerProps,
 } from './types';
 import { getValidationColor } from '../../../utils';
-import { InputDefault } from '../../../styles/templates/inputs';
+import {
+  InputDefault,
+  SmallInputDefault,
+} from '../../../styles/templates/inputs';
 
 export const InputField = styled('input')<InputFieldProps>`
   ${InputDefault};
+  ${({ small }) => small && SmallInputDefault};
   margin: ${(props) => props.margin || '0'};
 `;
 
@@ -46,9 +50,9 @@ export const InputValidationFeedback = styled.div<InputValidationFeedbackProps>`
   color: ${({ status, theme }) =>
     theme.colors[getValidationColor(status, 'primary')]};
   font-size: 0.8rem;
-  left: 2rem;
+  left: 1rem;
   bottom: 0;
-  transform: translateY(120%);
+  transform: translateY(125%);
 `;
 
 export const FormInputContainer = styled.div<CustomInputContainerProps>`

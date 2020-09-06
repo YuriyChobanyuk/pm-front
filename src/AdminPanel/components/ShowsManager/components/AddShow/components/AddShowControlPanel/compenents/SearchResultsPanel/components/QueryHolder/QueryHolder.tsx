@@ -3,7 +3,6 @@ import { OmdbSearchQuery } from '../../../../../../../../../../../interfaces';
 import styled from 'styled-components';
 
 const NoQueryPlaceholder = styled.h3`
-  padding: 1rem 0;
   margin: 0 1rem;
   font-size: 2rem;
   font-family: ${({ theme }) => theme.fonts.title};
@@ -12,17 +11,15 @@ const NoQueryPlaceholder = styled.h3`
 `;
 
 const QueryContainer = styled.div`
-  padding: 1rem 0;
+  padding: 2.25rem 1.5rem 1.5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  border-bottom: 2px solid ${({ theme }) => theme.colors.darken};
-  margin: 0 1rem 1rem;
+  margin-bottom: .8rem;
 `;
 
 const QuerySearch = styled.span`
-  padding: 0.5rem;
-  margin-top: 1rem;
+  padding: 0 0.5rem;
   font-size: 2rem;
   font-family: ${({ theme }) => theme.fonts.title};
   color: ${({ theme }) => theme.colors.primary};
@@ -41,7 +38,7 @@ const ParamKey = styled.span`
 `;
 
 const ParamResult = styled.span`
-  padding: 1.5rem;
+  padding: 0 1.5rem;
   color: ${({ theme }) => theme.colors.primaryLighten};
 `;
 

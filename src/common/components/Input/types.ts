@@ -5,6 +5,7 @@ export interface InputFieldProps {
   ref?: RefObject<any>;
   status?: ValidationStatus;
   margin?: string;
+  small?: boolean;
 }
 
 export interface InputLabelProps {
@@ -19,4 +20,5 @@ export interface CustomInputContainerProps {
   margin?: string;
   maxWidth?: string;
   hasValue?: boolean;
+  small?: boolean;
 }
