@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useChunkPagination } from './utils';
 
 interface RenderProps<T> {
@@ -7,6 +7,9 @@ interface RenderProps<T> {
   maxPage: number;
   changePage: (p: number) => void;
   setSearch: (s: string) => void;
+  setLimit: (l: number) => void;
+  search: string;
+  limit: number;
 }
 
 interface Props<T> {
@@ -23,13 +26,22 @@ const Pagination: <T extends {}>(props: Props<T>) => React.ReactElement = ({
   type ItemType = typeof items[0];
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState<string>('');
+  const [localLimit, setLocalLimit] = useState(limit);
+
+  const filteredItems = useMemo(() => {
+    if (!search) return items;
+    console.log({items, search})
+    return items.filter((itemProps) =>
+      Object.values(itemProps).some((val) =>
+        `${val}`.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [items, search]);
   const [currentItems, maxPage] = useChunkPagination<ItemType>(
-    items,
-    limit,
+    filteredItems,
+    localLimit,
     page
   );
-
-  console.log({ search });
 
   return (
     <div>
@@ -40,6 +52,9 @@ const Pagination: <T extends {}>(props: Props<T>) => React.ReactElement = ({
           maxPage,
           page,
           setSearch,
+          search,
+          limit: localLimit,
+          setLimit: setLocalLimit,
         })}
       </div>
     </div>

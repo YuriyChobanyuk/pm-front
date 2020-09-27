@@ -29,7 +29,7 @@ const DropdownHeader = styled.div<{ active: boolean }>`
     active &&
     `border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-bottom: none;`}
+    border-bottom: 2px solid transparent;`}
 `;
 
 interface DropdownContainerProps {
@@ -64,16 +64,14 @@ const DropdownIcon = styled(FontAwesomeIcon)<{ active: boolean }>`
     fill: ${({ theme }) => theme.colors.primary};
   }
 
-  ${({ active }) =>
-    active &&
-    `
-    transform: translateY(-50%)  rotate(180deg);
-  `}
+  ${({ active }) => active && `transform: translateY(-50%)  rotate(180deg);`}
 `;
 
-const listContainerActiveStyles = css<{
+interface ActiveProps {
   status?: ValidationStatus;
-}>`
+}
+
+const listContainerActiveStyles = css<ActiveProps>`
   height: auto;
   ${InputBorder};
   border-top: none;
@@ -91,10 +89,12 @@ const listContainerActiveStyles = css<{
   }
 `;
 
-const DropdownListContainer = styled.div<{
+interface DropdownListContainerProps {
   active: boolean;
   status?: ValidationStatus;
-}>`
+}
+
+const DropdownListContainer = styled.div<DropdownListContainerProps>`
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -171,9 +171,9 @@ const Dropdown: React.FC<Props> = ({
     (e: KeyboardEvent<HTMLDivElement>) => {
       const firstListElem = listRef.current?.firstChild as HTMLLIElement;
       const lastListElem = listRef.current?.lastChild as HTMLLIElement;
-      switch(e.key) {
+      switch (e.key) {
         case 'Enter':
-        case ' ':{
+        case ' ': {
           setActive((prev) => !prev);
           break;
         }
@@ -188,12 +188,13 @@ const Dropdown: React.FC<Props> = ({
           break;
         }
         case 'ArrowUp': {
-          if(lastListElem) {
+          if (lastListElem) {
             lastListElem.focus();
           }
           break;
         }
-        default: return;
+        default:
+          return;
       }
     },
     []
@@ -232,7 +233,8 @@ const Dropdown: React.FC<Props> = ({
           containerRef.current?.focus();
           break;
         }
-        default: return;
+        default:
+          return;
       }
     },
     [onChange, items]

@@ -16,6 +16,7 @@ import Pagination, {
   PaginationBar,
 } from '../../../../../../../../../common/components/Pagination';
 import PaginationSearch from '../../../../../../../../../common/components/Pagination/components/PaginationSearch';
+import PaginationControl from '../../../../../../../../../common/components/Pagination/components/PaginationControl';
 
 const SearchResultsContainer = styled.div`
   position: relative;
@@ -78,22 +79,43 @@ const SearchResultsPanel: React.FC<Props> = ({
       },
     ];
 
+    const defaultLimit = 6;
+
     return (
-      <Pagination<typeof rows[0]> items={rows} limit={6}>
-        {({ paginatedItems, page, maxPage, changePage, setSearch }) => {
+      <Pagination<typeof rows[0]> items={rows} limit={defaultLimit}>
+        {({
+          paginatedItems,
+          page,
+          maxPage,
+          changePage,
+          setSearch,
+          search,
+          limit,
+          setLimit,
+        }) => {
           return (
             <CustomTable
               headers={headers}
               rows={paginatedItems}
               maxHeight={maxHeight}
               controls={controls}
+              search={search}
               bottomSlot={
                 <PaginationBar
                   page={page}
                   maxPage={maxPage}
                   onChange={changePage}
-                  searchSlot={
-                    <PaginationSearch onSearch={setSearch} />
+                  searchSlot={<PaginationSearch onSearch={setSearch} />}
+                  limitSlot={
+                    <PaginationControl
+                      currentLimit={limit}
+                      setLimit={setLimit}
+                      limitOptions={[
+                        defaultLimit,
+                        defaultLimit * 2,
+                        defaultLimit * 4,
+                      ]}
+                    />
                   }
                 />
               }

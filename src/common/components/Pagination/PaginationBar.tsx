@@ -1,7 +1,7 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, {css} from 'styled-components';
 import IconButton from '../Table/components/IconButton';
-import { ColorVariants } from '../../../styles/themes/types/theme-types';
+import {ColorVariants} from '../../../styles/themes/types/theme-types';
 import {
   faAngleDoubleLeft,
   faAngleDoubleRight,
@@ -9,7 +9,7 @@ import {
   faAngleRight,
   faEllipsisH,
 } from '@fortawesome/free-solid-svg-icons';
-import { usePagePagination } from './utils';
+import {usePagePagination} from './utils';
 
 const DotsPlaceholder = styled.div`
   width: 2rem;
@@ -20,7 +20,7 @@ const DotsPlaceholder = styled.div`
 const Col = styled.div<{ size: number }>`
   width: 100%;
   max-width: ${({ size }) => size}%;
-  padding: 0 .75rem;
+  padding: 0 0.75rem;
 `;
 
 const PaginationBarContainer = styled.div`
@@ -44,6 +44,24 @@ const PaginationItem = styled.li`
 
 const PaginationNumber = styled.span`
   font-size: 1.1rem;
+`;
+
+const DropdownContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const DropdownLabel = styled.span`
+  color: ${({ theme }) => theme.colors.lightcyan};
+  width: 60%;
+  text-align: end;
+  padding-right: 1rem;
+  
+  & + div {
+    width: 40%;
+    min-width: 5rem;
+  }
 `;
 
 const ActionPagination = css`
@@ -88,6 +106,7 @@ interface Props {
   maxPage: number;
   onChange: (p: number) => void;
   searchSlot?: React.ReactElement;
+  limitSlot?: React.ReactElement;
 }
 
 const PaginationBar: React.FC<Props> = ({
@@ -95,6 +114,7 @@ const PaginationBar: React.FC<Props> = ({
   maxPage,
   onChange,
   searchSlot,
+  limitSlot,
 }) => {
   const [pages, paginationStatus] = usePagePagination({ page, maxPage });
 
@@ -215,7 +235,14 @@ const PaginationBar: React.FC<Props> = ({
             : getComplexPagination()}
         </PaginationList>
       </Col>
-      <Col size={25} />
+      <Col size={25}>
+        {limitSlot && (
+          <DropdownContainer>
+            <DropdownLabel>Items per page</DropdownLabel>
+            {limitSlot}
+          </DropdownContainer>
+        )}
+      </Col>
     </PaginationBarContainer>
   );
 };

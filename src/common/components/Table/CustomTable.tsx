@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import get from 'lodash/get';
 
 import {
@@ -13,6 +13,7 @@ import {
 import { TableButtonProps } from './components/IconButton';
 import styled from 'styled-components';
 import TableControl from './components/TableControl';
+import TableMatchHighlight from './components/TableMatchHighlight';
 
 const TableControlHeaderCell = styled(TableHeadCell)`
   width: 2rem;
@@ -33,6 +34,7 @@ interface Props {
 
   maxHeight?: string;
   controls?: TableButtonProps[];
+  search?: string;
 
   bottomSlot?: React.ReactElement;
 }
@@ -43,6 +45,7 @@ const CustomTable: React.FC<Props> = ({
   controls,
   maxHeight,
   bottomSlot,
+  search,
 }) => {
   const getRowValue = (row: any, key: string) => get(row, key, '-') as string;
   const CONTROLS_HEADER_KEY = 'controls';
@@ -64,20 +67,31 @@ const CustomTable: React.FC<Props> = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow>
-              {tableHeaders.map((key) => {
-                if (key === CONTROLS_HEADER_KEY && controls) {
+          {!rows || !rows.length ? (
+            <span>no results</span>
+          ) : (
+            rows.map((row) => (
+              <TableRow>
+                {tableHeaders.map((key) => {
+                  if (key === CONTROLS_HEADER_KEY && controls) {
+                    return (
+                      <TableControlDataCell>
+                        <TableControl controls={controls} id={row.id} />
+                      </TableControlDataCell>
+                    );
+                  }
                   return (
-                    <TableControlDataCell>
-                      <TableControl controls={controls} id={row.id} />
-                    </TableControlDataCell>
+                    <TableDataCell>
+                      <TableMatchHighlight
+                        search={search}
+                        text={getRowValue(row, key)}
+                      />
+                    </TableDataCell>
                   );
-                }
-                return <TableDataCell>{getRowValue(row, key)}</TableDataCell>;
-              })}
-            </TableRow>
-          ))}
+                })}
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
       {bottomSlot}
