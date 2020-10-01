@@ -4,7 +4,6 @@ import { OmdbSearchQuery } from '../../../../../../../interfaces';
 import { useSelector } from 'react-redux';
 import { omdbSearchResultsSelector } from '../../../../ducks/selectors';
 import SearchResultsPanel from './compenents/SearchResultsPanel';
-import { mockSearchQuery, mockSearchResponse } from './mock-response';
 import isEqual from 'lodash/isEqual';
 
 const AddShowControlPanel: React.FC = () => {
@@ -25,8 +24,8 @@ const AddShowControlPanel: React.FC = () => {
         setSearchQuery={setCurrentSearchQuery}
       />
       <SearchResultsPanel
-        currentSearchQuery={mockSearchQuery}
-        searchResults={mockSearchResponse}
+        currentSearchQuery={existingSearchQuery?.params}
+        searchResults={existingSearchQuery?.results}
         queryHasError={error}
         queryIsLoading={loading}
       />

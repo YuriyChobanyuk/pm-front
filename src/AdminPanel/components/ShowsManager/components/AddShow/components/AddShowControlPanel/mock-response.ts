@@ -3,7 +3,7 @@ import {
   OmdbSearchQuery,
 } from '../../../../../../../interfaces';
 
-export const mockSearchResponse: OmdbSearchData[] = [
+export const mockSearchResponse = [
   {
     title: 'The Lord of the Rings: The Fellowship of the Ring',
     year: '2001',

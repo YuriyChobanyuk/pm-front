@@ -43,7 +43,7 @@ const ParamResult = styled.span`
 `;
 
 interface Props {
-  currentQuery: OmdbSearchQuery | null;
+  currentQuery: OmdbSearchQuery | undefined;
 }
 
 const QueryHolder: React.FC<Props> = ({ currentQuery }) => {

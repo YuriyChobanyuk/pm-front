@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   OmdbSearchData,
   OmdbSearchQuery,
@@ -17,14 +17,17 @@ import Pagination, {
 } from '../../../../../../../../../common/components/Pagination';
 import PaginationSearch from '../../../../../../../../../common/components/Pagination/components/PaginationSearch';
 import PaginationControl from '../../../../../../../../../common/components/Pagination/components/PaginationControl';
+import omdbService from '../../../../../../../../../services/omdb.service';
+import { useDispatch } from 'react-redux';
+import { getOmdbShowDetailsAction } from '../../../../../../ducks';
 
 const SearchResultsContainer = styled.div`
   position: relative;
 `;
 
 interface Props {
-  currentSearchQuery: OmdbSearchQuery | null;
-  searchResults: OmdbSearchData[] | null;
+  currentSearchQuery: OmdbSearchQuery | undefined;
+  searchResults: OmdbSearchData[] | undefined;
   queryIsLoading?: boolean;
   queryHasError?: any;
 }
@@ -35,6 +38,29 @@ const SearchResultsPanel: React.FC<Props> = ({
   queryHasError,
   queryIsLoading,
 }) => {
+  const dispatch = useDispatch();
+
+
+  const handleGetDetails = useCallback((id: string) => {
+    const selectedSearchResult = searchResults?.find(
+      ({ imdbId }) => id === imdbId
+    );
+    if (!selectedSearchResult) {
+      // TODO add error notification
+      return;
+    }
+
+    const { imdbId: i, type, year: y, title: t } = selectedSearchResult;
+    dispatch(
+      getOmdbShowDetailsAction({
+        i,
+        type,
+        y,
+        t,
+      })
+    );
+  }, [dispatch, searchResults]);
+
   const getSearchResults = () => {
     // TODO replace to the better loader
     if (queryIsLoading) {
@@ -61,7 +87,7 @@ const SearchResultsPanel: React.FC<Props> = ({
     const controls: TableButtonProps[] = [
       {
         icon: faClipboard,
-        callback: (id: string) => id,
+        callback: handleGetDetails,
         color: 'info',
         label: 'Get details',
       },

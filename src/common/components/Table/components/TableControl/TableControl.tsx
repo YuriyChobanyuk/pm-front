@@ -80,7 +80,10 @@ const TableControl: React.FC<Props> = ({ controls, id }) => {
                 key={`${label}-${id}`}
                 id={`${label}-${id}`}
                 label={label}
-                callback={callback}
+                callback={() => {
+                  callback(id);
+                  handleClose();
+                }}
                 icon={icon}
                 color={color}
                 fontColor={fontColor}

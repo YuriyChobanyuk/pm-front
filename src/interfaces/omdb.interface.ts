@@ -4,8 +4,7 @@ export interface OmdbSearchData {
   title: string;
   year: string;
   imdbId: string;
-  // TODO temporary added string to match mock data interface
-  type: ShowType | string;
+  type: ShowType;
 }
 
 export interface OmdbSearchQuery {
