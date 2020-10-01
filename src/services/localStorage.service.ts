@@ -1,3 +1,6 @@
+import * as jwt from 'jsonwebtoken';
+import {AccessTokenPayload} from "../interfaces";
+
 class LocalStorageService {
   getAccessToken(): string | null {
     return localStorage.getItem('accessToken');
@@ -9,6 +12,12 @@ class LocalStorageService {
 
   deleteAccessToken(): void {
     localStorage.removeItem('accessToken');
+  }
+
+  getTokenPayload(): AccessTokenPayload | null {
+    const accessToken = this.getAccessToken();
+    if (!accessToken) return null;
+    return jwt.decode(accessToken) as AccessTokenPayload;
   }
 }
 

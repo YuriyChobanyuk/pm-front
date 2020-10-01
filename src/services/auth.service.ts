@@ -2,8 +2,8 @@ import appClient from '../appClient';
 import { AxiosError, AxiosResponse } from 'axios';
 import { decode } from 'jsonwebtoken';
 
-import { IUser } from '../interfaces/user.interface';
-import { LoginCredentials, AuthResponse } from '../interfaces/auth.interface';
+import { IUser } from '../interfaces';
+import { LoginCredentials, AuthResponse } from '../interfaces';
 
 class AuthService {
   private _refreshCalled = false;
@@ -20,7 +20,7 @@ class AuthService {
     loginCredentials: LoginCredentials
   ): Promise<AuthResponse> {
     return appClient
-      .post('/auth/login', loginCredentials)
+      .post('/Auth/login', loginCredentials)
       .then((response: AxiosResponse<AuthResponse>) => response.data)
       .catch((error: AxiosError) => {
         console.error(error.message);
@@ -34,7 +34,7 @@ class AuthService {
     this.refreshCalled = true;
 
     const response = await appClient
-      .get('/auth/refresh')
+      .get('/Auth/refresh')
       .then((response: AxiosResponse<AuthResponse>) => {
         return response.data;
       })

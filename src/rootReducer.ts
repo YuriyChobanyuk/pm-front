@@ -2,13 +2,13 @@ import { history } from './history';
 import { combineReducers } from '@reduxjs/toolkit';
 import { connectRouter } from 'connected-react-router';
 
-import { reducer as auth } from './shell/auth/ducks/authSlice';
-import { reducer as note } from './note-manager/ducks/notesSlice';
+import authReducer from './Shell/components/Auth/ducks';
+import showsManagerReducer from './AdminPanel/components/ShowsManager/ducks';
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
-  auth,
-  note,
+  auth: authReducer,
+  showsManager: showsManagerReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

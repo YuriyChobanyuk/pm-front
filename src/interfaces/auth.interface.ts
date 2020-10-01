@@ -1,4 +1,4 @@
-import { IUser } from './user.interface';
+import { IUser, UserRole } from './user.interface';
 
 export type LoginCredentials = {
   email: string;
@@ -10,5 +10,13 @@ export type SignUpCredentials = {
   password: string;
   name: string;
 };
+
+export interface AccessTokenPayload {
+  exp: number;
+  iat: number;
+  name: string;
+  role: UserRole;
+  userId: string;
+}
 
 export type AuthResponse = { token: string; data: { user: IUser } };
